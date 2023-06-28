@@ -13,10 +13,16 @@ public abstract class UserInterface : MonoBehaviour
     public InventoryObject inventory;
     private InventoryObject _previousInventory;
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+    private bool slotsCreated = false; // Flag to track if slots have been created
+
 
     public void OnEnable()
     {
-        CreateSlots();
+        if (!slotsCreated)
+        {
+            CreateSlots();
+            slotsCreated = true;
+        }
 
         for (int i = 0; i < inventory.GetSlots.Length; i++)
         {
