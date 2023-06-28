@@ -33,6 +33,7 @@ public class MC_Controller : MonoBehaviour
         HandleRun();
         HandleInventory();
         HandlePickup();
+        CheckAnimationState();
     }
 
     private void HandleMovement()
@@ -112,6 +113,15 @@ public class MC_Controller : MonoBehaviour
                 pickupObject.PickUp();                              // Pick up the object
                 animator.SetBool("isPicking", true);                 // Set the "isPicking" parameter in the animator
             }
+        }
+    }
+
+    private void CheckAnimationState()
+    {
+        if (animator.GetBool("isPicking") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Picking"))
+        {
+            animator.SetBool("isPicking", false);
+            // Set other animation parameters or trigger appropriate transitions here
         }
     }
 
