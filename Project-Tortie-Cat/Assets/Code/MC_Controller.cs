@@ -2,28 +2,44 @@
 
 public class MC_Controller : MonoBehaviour
 {
-    public float moveSpeed = 5f;                          // Movement speed of the character
-    public float jumpForce = 5f;                          // Force applied when the character jumps
-    public float runSpeedMultiplier = 2f;                 // Multiplier for movement speed when running
-    public Transform groundCheck;                         // Transform used to check if the character is grounded
-    public LayerMask groundLayer;                         // Layer mask for identifying ground
-    public float interactRange = 2f;                      // Range for interacting with objects
-    public InventoryObject playerInventory;               // The player's inventory
-    public GameObject inventoryUI;                        // UI element for the inventory
+    // Movement speed of the character
+    public float moveSpeed = 5f;
+    // Force applied when the character jumps
+    public float jumpForce = 5f;
+    // Multiplier for movement speed when running
+    public float runSpeedMultiplier = 2f;
+    // Transform used to check if the character is grounded
+    public Transform groundCheck;
+    // Layer mask for identifying ground
+    public LayerMask groundLayer;
+    // Range for interacting with objects
+    public float interactRange = 2f;
+    // The player's inventory
+    public InventoryObject playerInventory;
+    // UI element for the inventory
+    public GameObject inventoryUI;
 
-    private Rigidbody rb;                                 // Reference to the character's Rigidbody component
-    private Animator animator;                             // Reference to the character's Animator component
-    private bool isGrounded;                               // Flag indicating if the character is grounded
-    private bool isRunning;                                // Flag indicating if the character is running
-    private bool isInventoryOpen;                          // Flag indicating if the inventory is open
-    private PickUpObject currentPickupObject;              // The current object the character can pick up
+    // Reference to the character's Rigidbody component
+    private Rigidbody rb;
+    // Reference to the character's Animator component
+    private Animator animator;
+    // Flag indicating if the character is grounded
+    private bool isGrounded;
+    // Flag indicating if the character is running
+    private bool isRunning;                                
+    // Flag indicating if the inventory is open
+    private bool isInventoryOpen;                          
+    // The current object the character can pick up
+    private GroundItem currentGroundItem;              
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        inventoryUI.SetActive(false);                      // Initially hide the inventory UI
-        CloseInventory();                                   // Close the inventory
+        // Initially hide the inventory UI
+        inventoryUI.SetActive(false);                      
+        // Close the inventory
+        CloseInventory();                                   
     }
 
     private void Update()
@@ -42,25 +58,31 @@ public class MC_Controller : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         float currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;
         Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical) * currentSpeed * Time.deltaTime;
-        rb.MovePosition(transform.position + movement);     // Move the character's position
+        // Move the character's position
+        rb.MovePosition(transform.position + movement);     
 
         if (movement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 360f);   // Rotate the character towards the movement direction
+            // Rotate the character towards the movement direction
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 360f);   
         }
 
-        animator.SetBool("isWalking", movement != Vector3.zero);   // Set the "isWalking" parameter in the animator
+        // Set the "isWalking" parameter in the animator
+        animator.SetBool("isWalking", movement != Vector3.zero);   
     }
 
     private void HandleJump()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);   // Check if the character is grounded
+        // Check if the character is grounded
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);   
 
-        if (Input.GetButtonDown("Jump") && isGrounded)        // Jump if the jump button is pressed and the character is grounded
+        // Jump if the jump button is pressed and the character is grounded
+        if (Input.GetButtonDown("Jump") && isGrounded)        
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            animator.SetBool("isJumping", true);              // Set the "isJumping" parameter in the animator
+            // Set the "isJumping" parameter in the animator
+            animator.SetBool("isJumping", true);              
         }
         else
         {
@@ -73,7 +95,8 @@ public class MC_Controller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             isRunning = true;
-            animator.SetBool("isRunning", true);               // Set the "isRunning" parameter in the animator
+            // Set the "isRunning" parameter in the animator
+            animator.SetBool("isRunning", true);               
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
@@ -105,15 +128,23 @@ public class MC_Controller : MonoBehaviour
     private void TryPickup()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange))   // Cast a ray forward to detect objects within the interact range
+        if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange))
         {
-            PickUpObject pickupObject = hit.collider.GetComponent<PickUpObject>();            // Check if the detected object can be picked up
-            if (pickupObject != null)
+            GroundItem groundItem = hit.collider.GetComponent<GroundItem>();
+            if (groundItem != null && groundItem.isPickupable)
             {
-                pickupObject.PickUp();                              // Pick up the object
-                animator.SetBool("isPicking", true);                 // Set the "isPicking" parameter in the animator
+                PickUp(groundItem);
             }
         }
+    }
+
+    private void PickUp(GroundItem groundItem)
+    {
+        ItemObject itemObject = groundItem.itemObject;
+        int amount = 1;
+
+        playerInventory.AddItem(itemObject.CreateItem(), amount);
+        Destroy(groundItem.gameObject);
     }
 
     private void CheckAnimationState()
@@ -127,44 +158,41 @@ public class MC_Controller : MonoBehaviour
 
     private void OpenInventory()
     {
-        inventoryUI.SetActive(true);                        // Show the inventory UI
+        // Show the inventory UI
+        inventoryUI.SetActive(true);                        
         isInventoryOpen = true;
-        Time.timeScale = 0f;                                 // Pause the game
+        // Pause the game
+        Time.timeScale = 0f;                                 
     }
 
     private void CloseInventory()
     {
-        inventoryUI.SetActive(false);                       // Hide the inventory UI
+        // Hide the inventory UI
+        inventoryUI.SetActive(false);                       
         isInventoryOpen = false;
-        Time.timeScale = 1f;                                 // Resume the game's time scale
+        // Resume the game's time scale
+        Time.timeScale = 1f;                                 
     }
 
-    public void SetCurrentPickupObject(PickUpObject pickupObject)
-    {
-        currentPickupObject = pickupObject;
-    }
 
     public void SetInventory(InventoryObject inventoryObject)
     {
         playerInventory = inventoryObject;
     }
 
-    public void Interact()
-    {
-        if (currentPickupObject != null)
-        {
-            currentPickupObject.PickUp();                      // Pick up the current object
-            currentPickupObject = null;
-        }
-    }
-
     public void AddItemToInventory(Item item, int amount)
     {
-        playerInventory.AddItem(item, amount);                  // Add an item to the player's inventory
+        // Add an item to the player's inventory
+        playerInventory.AddItem(item, amount);                  
+    }
+
+    public void SetCurrentPickupObject(GroundItem groundItem)
+    {
+        currentGroundItem = groundItem;
     }
 
     public void ClearCurrentPickupObject()
     {
-        currentPickupObject = null;
+        currentGroundItem = null;
     }
 }

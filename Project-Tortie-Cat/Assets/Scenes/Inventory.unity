@@ -485,19 +485,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 43370538975573797, guid: ec542c4e95b20864b876418ba4ae28ad, type: 3}
   m_PrefabInstance: {fileID: 126088457}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &566450023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566450022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b347feda446196408ba99f4f9c09048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryObject: {fileID: 11400000, guid: 449dff01a062c9341b78870f110bf288, type: 2}
 --- !u!114 &566450024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb9513e57598344792267109fcf975d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 870e3658809c39d4097073b3da1bab17, type: 2}
+  itemObject: {fileID: 11400000, guid: 870e3658809c39d4097073b3da1bab17, type: 2}
+  isPickupable: 1
 --- !u!1 &869834997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 440760118599784104, guid: 7e5dff05417a534479f911ae3627021a, type: 3}
@@ -534,7 +522,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 449dff01a062c9341b78870f110bf288, type: 2}
-  slotPrefab: {fileID: 2782053823010051893, guid: dd15fc6ab69d8ce4e96312de89a06820, type: 3}
   inventoryPrefab: {fileID: 2782053823010051893, guid: dd15fc6ab69d8ce4e96312de89a06820, type: 3}
 --- !u!114 &869835000
 MonoBehaviour:
@@ -562,7 +549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 449dff01a062c9341b78870f110bf288, type: 2}
-  slotPrefab: {fileID: 2782053823010051893, guid: dd15fc6ab69d8ce4e96312de89a06820, type: 3}
   slots: []
 --- !u!1001 &1297803635
 PrefabInstance:
