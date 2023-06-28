@@ -2381,7 +2381,6 @@ GameObject:
   - component: {fileID: 8545545995137135640}
   - component: {fileID: 8545545995137135643}
   - component: {fileID: 8545545995137135622}
-  - component: {fileID: 7571512826342568266}
   m_Layer: 0
   m_Name: X Bot
   m_TagString: Untagged
@@ -2458,22 +2457,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   interactRange: 2
---- !u!95 &7571512826342568266
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8815384089269922892}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 9aa127de01194a74dba1fbde8780ba7a, type: 3}
-  m_Controller: {fileID: 9100000, guid: c09ee9ff39a934344867f2976a874cb6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  playerInventory: {fileID: 0}
+  inventoryUI: {fileID: 0}
