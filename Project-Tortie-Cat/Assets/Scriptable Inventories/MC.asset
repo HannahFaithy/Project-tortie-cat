@@ -21,58 +21,68 @@ MonoBehaviour:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0
   - AllowedItems: 
     item:
       Name: 
       Id: 0
       buffs: []
+      itemObject: {fileID: 0}
     amount: 0

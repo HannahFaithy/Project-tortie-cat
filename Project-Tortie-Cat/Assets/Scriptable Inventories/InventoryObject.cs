@@ -38,7 +38,7 @@ public class InventoryObject : ScriptableObject
 
     public bool IsItemInInventory(ItemObject item)
     {
-        return GetSlots.Any(slot => slot.item.Id == item.data.Id);  // Check if the specified item is in the inventory
+        return GetSlots.Any(slot => slot.item.Id == item.Id);  // Check if the specified item is in the inventory
     }
 
     public InventorySlot GetEmptySlot()

@@ -10,31 +10,30 @@ public class ItemObject : ScriptableObject
     public bool stackable;
     public ItemType type;
     [TextArea(15, 20)] public string description;
-    public Item data = new Item();
+    public int Id; // Updated field name to match the 'Item' class
 
     public List<string> boneNames = new List<string>();
 
     public Item CreateItem()
     {
-        Item newItem = new Item(this);
+        Item newItem = new Item();
+        newItem.data.Id = Id; // Assign the Id value to the Item's data field
         return newItem;
     }
 
     private void OnValidate()
     {
         boneNames.Clear();
-        if (characterDisplay == null) 
+        if (characterDisplay == null)
             return;
-        if(!characterDisplay.GetComponent<SkinnedMeshRenderer>())
+        if (!characterDisplay.TryGetComponent<SkinnedMeshRenderer>(out var renderer))
             return;
 
-        var renderer = characterDisplay.GetComponent<SkinnedMeshRenderer>();
         var bones = renderer.bones;
 
-        foreach (var t in bones)
+        foreach (var bone in bones)
         {
-            boneNames.Add(t.name);
+            boneNames.Add(bone.name);
         }
     }
 }
-

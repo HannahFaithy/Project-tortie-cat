@@ -19,6 +19,7 @@ MonoBehaviour:
   description: 
   data:
     Name: Flower
-    Id: -1
+    Id: 1
     buffs: []
+    itemObject: {fileID: 0}
   boneNames: []
