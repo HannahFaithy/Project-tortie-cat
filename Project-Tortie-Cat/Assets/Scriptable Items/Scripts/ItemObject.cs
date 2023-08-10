@@ -5,6 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory System/Items/New Item")]
 public class ItemObject : ScriptableObject
 {
+    [Serializable]
+    public class ItemData
+    {
+        public int Id;
+        public ItemBuff[] buffs;
+        // Other properties related to the item's data
+    }
+
     public Sprite uiDisplay;
     public GameObject characterDisplay;
     public bool stackable;
@@ -13,11 +21,11 @@ public class ItemObject : ScriptableObject
     public int Id; // Updated field name to match the 'Item' class
 
     public List<string> boneNames = new List<string>();
+    public ItemData data = new ItemData(); // Nested ItemData instance
 
     public Item CreateItem()
     {
-        Item newItem = new Item();
-        newItem.data.Id = Id; // Assign the Id value to the Item's data field
+        Item newItem = new Item(this);
         return newItem;
     }
 
