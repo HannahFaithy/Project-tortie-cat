@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MC_Controller : MonoBehaviour
 {
@@ -183,6 +184,7 @@ public class MC_Controller : MonoBehaviour
     public void AddItemToInventory(Item item, int amount)
     {
         // Add an item to the player's inventory
+        Console.WriteLine("Additem");
         playerInventory.AddItem(item, amount);                  
     }
 

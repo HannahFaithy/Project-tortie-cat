@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -16,11 +17,15 @@ public class InventoryObject : ScriptableObject
     public bool AddItem(Item item, int amount)
     {
         if (EmptySlotCount <= 0)
+        {
+            Console.WriteLine("No empty slots avabile");
             return false;
+        }
 
         InventorySlot slot = FindItemOnInventory(item);
         if (!database.ItemObjects[item.Id].stackable || slot == null)
         {
+            Console.WriteLine("adding item to empty slot");
             GetEmptySlot().UpdateSlot(item, amount);
             return true;
         }
