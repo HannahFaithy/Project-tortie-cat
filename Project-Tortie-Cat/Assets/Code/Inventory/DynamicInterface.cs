@@ -26,7 +26,7 @@ public class DynamicInterface : UserInterface
 
         for (int i = 0; i < inventory.GetSlots.Length; i++)
         {
-            var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
+            GameObject obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
             // Create a new instance of the inventoryPrefab and attach it to the DynamicInterface's transform.
 
             obj.GetComponent<RectTransform>().localPosition = Vector3.zero;
