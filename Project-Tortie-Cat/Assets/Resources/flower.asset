@@ -17,9 +17,8 @@ MonoBehaviour:
   stackable: 0
   type: 0
   description: 
+  Id: 1
+  boneNames: []
   data:
-    Name: Flower
     Id: 1
     buffs: []
-    itemObject: {fileID: 0}
-  boneNames: []

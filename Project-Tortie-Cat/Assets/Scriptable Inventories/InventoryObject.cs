@@ -16,16 +16,17 @@ public class InventoryObject : ScriptableObject
 
     public bool AddItem(Item item, int amount)
     {
+        Debug.Log("EmptySlotCount: " + EmptySlotCount);
         if (EmptySlotCount <= 0)
         {
-            Console.WriteLine("No empty slots avabile");
+            Debug.Log("No empty slots available");
             return false;
         }
 
         InventorySlot slot = FindItemOnInventory(item);
         if (!database.ItemObjects[item.Id].stackable || slot == null)
         {
-            Console.WriteLine("adding item to empty slot");
+            Debug.Log("Adding item to empty slot");
             GetEmptySlot().UpdateSlot(item, amount);
             return true;
         }
