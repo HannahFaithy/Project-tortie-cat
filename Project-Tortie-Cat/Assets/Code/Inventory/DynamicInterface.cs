@@ -24,6 +24,12 @@ public class DynamicInterface : UserInterface
 
         slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
 
+        // Initialize the inventory slots outside the loop
+        for (int i = 0; i < inventory.GetSlots.Length; i++)
+        {
+            inventory.GetSlots[i] = new InventorySlot(i); // Initialize the inventory slot with the index
+        }
+
         for (int i = 0; i < inventory.GetSlots.Length; i++)
         {
             GameObject obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
@@ -50,10 +56,10 @@ public class DynamicInterface : UserInterface
             // Add event triggers for different interactions to the instantiated object.
 
             inventory.GetSlots[i].slotDisplay = obj;
+            Debug.Log("Slot Display: " + obj.name + " -> " + inventory.GetSlots[i].Index);
             // Assign the instantiated object as the slot display for the corresponding inventory slot.
 
             slotsOnInterface.Add(obj, inventory.GetSlots[i]);
-            // Add the instantiated object and its associated inventory slot to the slotsOnInterface dictionary.
         }
     }
 }

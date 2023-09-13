@@ -134,13 +134,21 @@ public class MC_Controller : MonoBehaviour
             GroundItem groundItem = hit.collider.GetComponent<GroundItem>();
             if (groundItem != null && groundItem.isPickupable)
             {
-                PickUp(groundItem);
+                if (playerInventory.EmptySlotCount > 0) // Check if there are empty slots
+                {
+                    PickUp(groundItem);
+                }
+                else
+                {
+                    Debug.Log("No empty slots available in the inventory.");
+                }
             }
         }
     }
 
     private void PickUp(GroundItem groundItem)
     {
+        Debug.Log("Picking up item: " + groundItem.itemObject.name);
         ItemObject itemObject = groundItem.itemObject;
         int amount = 1;
 

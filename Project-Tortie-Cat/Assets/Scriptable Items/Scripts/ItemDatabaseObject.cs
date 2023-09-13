@@ -13,7 +13,14 @@ public class ItemDatabaseObject : ScriptableObject
     {
         for (int i = 0; i < ItemObjects.Length; i++)
         {
-            ItemObjects[i].Id = i; // Update the assignment to 'Id'
+            if (ItemObjects[i] == null)
+            {
+                Debug.LogError($"ItemObjects[{i}] is null.");
+            }
+            else
+            {
+                ItemObjects[i].Id = i; // Update the assignment to 'Id'
+            }
         }
     }
 }

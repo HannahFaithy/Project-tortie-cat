@@ -1,8 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
@@ -11,31 +10,55 @@ public class InventoryObject : ScriptableObject
     public string savePath;  // The path to save the inventory data
     public ItemDatabaseObject database;  // The item database containing item information
     public InterfaceType type;
-    [SerializeField] private InventorySlot[] slots = new InventorySlot[0];  // Array of inventory slots
+
+    [SerializeField]
+    private InventorySlot[] slots = new InventorySlot[10];  // Array of inventory slots
+    private List<int> emptySlots = new List<int>();  // List of empty slot indices
+
     public InventorySlot[] GetSlots => slots;  // Get the array of inventory slots
+
+    public InventoryObject() // Constructor to initialize the inventory with a specific number of slots
+    {
+        InitializeSlots();
+        Debug.Log("Inventory slots initialized.");
+    }
+
+    private void InitializeSlots()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i] = new InventorySlot();
+        }
+    }
 
     public bool AddItem(Item item, int amount)
     {
+        Debug.Log("EmptySlotCount (Before): " + EmptySlotCount);
         Debug.Log("EmptySlotCount: " + EmptySlotCount);
-        if (EmptySlotCount <= 0)
-        {
-            Debug.Log("No empty slots available");
-            return false;
-        }
+        Debug.Log("Empty Slots: " + string.Join(", ", emptySlots)); // Add this line
 
-        InventorySlot slot = FindItemOnInventory(item);
-        if (!database.ItemObjects[item.Id].stackable || slot == null)
+        // Check if the index is valid before accessing the array
+        if (item.Id >= 0 && item.Id < GetSlots.Length)
         {
-            Debug.Log("Adding item to empty slot");
-            GetEmptySlot().UpdateSlot(item, amount);
+            InventorySlot slot = GetSlots[item.Id];
+            if (!database.ItemObjects[item.Id].stackable || slot == null)
+            {
+                Debug.Log("Adding item to empty slot");
+                GetEmptySlot().UpdateSlot(item, amount);
+                return true;
+            }
+
+            slot.AddAmount(amount);
             return true;
         }
-
-        slot.AddAmount(amount);
-        return true;
+        else
+        {
+            Debug.LogError("Invalid item index: " + item.Id);
+            return false;
+        }
     }
 
-    public int EmptySlotCount => GetSlots.Count(slot => slot.item.Id <= -1);  // Get the count of empty slots in the inventory
+    public int EmptySlotCount => emptySlots.Count;  // Get the count of empty slots in the inventory
 
     public InventorySlot FindItemOnInventory(Item item)
     {
@@ -49,7 +72,13 @@ public class InventoryObject : ScriptableObject
 
     public InventorySlot GetEmptySlot()
     {
-        return GetSlots.FirstOrDefault(slot => slot.item.Id <= -1);  // Get the first empty slot in the inventory
+        if (emptySlots.Count > 0)
+        {
+            int emptySlotIndex = emptySlots[0];
+            emptySlots.RemoveAt(0);
+            return slots[emptySlotIndex];
+        }
+        return null;
     }
 
     public void SwapItems(InventorySlot item1, InventorySlot item2)
@@ -84,6 +113,10 @@ public class InventoryObject : ScriptableObject
             for (int i = 0; i < slots.Length; i++)
             {
                 slots[i].UpdateSlot(newSlots[i].item, newSlots[i].amount);  // Update the slots with the loaded data
+                if (newSlots[i].item.Id <= -1)
+                {
+                    emptySlots.Add(i);  // Add empty slot indices to the list
+                }
             }
             stream.Close();
         }
@@ -94,6 +127,7 @@ public class InventoryObject : ScriptableObject
         foreach (InventorySlot slot in slots)
         {
             slot.RemoveItem();  // Remove items from all slots in the inventory
+            emptySlots.Add(slot.Index);  // Add emptied slot indices to the list
         }
     }
 }

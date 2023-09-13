@@ -19,6 +19,12 @@ public class InventorySlot
     
     public Item item;
     public int amount;
+    public int Index { get; private set; } // Add an Index property
+
+    public InventorySlot(int index)
+    { 
+        Index = index;
+    }
 
     public ItemObject GetItemObject()
     {
