@@ -1,29 +1,39 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class InventorySlot
 {
     public ItemType[] AllowedItems = new ItemType[0];
-    
+
     [System.NonSerialized]
     public UserInterface parent;
     [System.NonSerialized]
     public GameObject slotDisplay;
 
-    
     [System.NonSerialized]
-    public Action<InventorySlot> onAfterUpdated;
+    public System.Action<InventorySlot> onAfterUpdated;
     [System.NonSerialized]
-    public Action<InventorySlot> onBeforeUpdated;
-    
+    public System.Action<InventorySlot> onBeforeUpdated;
+
     public Item item;
     public int amount;
     public int Index { get; private set; } // Add an Index property
 
     public InventorySlot(int index)
-    { 
+    {
         Index = index;
+        Debug.Log("InventorySlot with index " + index + " initialized.");
+    }
+
+    public InventorySlot() : this(-1) // Call the other constructor with a default index of -1
+    {
+        Debug.Log("Empty InventorySlot initialized.");
+    }
+
+    public InventorySlot(Item item, int amount) : this(-1) // Call the other constructor with a default index of -1
+    {
+        UpdateSlot(item, amount);
+        Debug.Log("InventorySlot with item " + item.Name + " and amount " + amount + " initialized.");
     }
 
     public ItemObject GetItemObject()
@@ -31,14 +41,22 @@ public class InventorySlot
         return item.Id >= 0 ? parent.inventory.database.ItemObjects[item.Id] : null;
     }
 
-    public InventorySlot() => UpdateSlot(new Item(), 0);
-
-    public InventorySlot(Item item, int amount) => UpdateSlot(item, amount);
-
-    public void RemoveItem() => UpdateSlot(new Item(), 0);
+    public void RemoveItem()
+    {
+        if (item.Id >= 0)
+        {
+            Debug.Log("Removing item " + item.Name + " from slot.");
+            item = new Item(); // Set the item to a default empty item
+            amount = 0; // Reset the amount to zero
+            Debug.Log("Item removed from slot. Slot is now empty.");
+        }
+        else
+        {
+            Debug.LogWarning("Attempting to remove item from an already empty slot.");
+        }
+    }
 
     public void AddAmount(int value) => UpdateSlot(item, amount += value);
-
 
     public void UpdateSlot(Item itemValue, int amountValue)
     {
@@ -59,5 +77,4 @@ public class InventorySlot
         }
         return false;
     }
-
 }
