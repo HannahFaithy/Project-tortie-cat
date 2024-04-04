@@ -8,7 +8,6 @@ public class MC_Controller : MonoBehaviour
     public Transform groundCheck;                         // Transform used to check if the character is grounded
     public LayerMask groundLayer;                         // Layer mask for identifying ground
     public float interactRange = 2f;                      // Range for interacting with objects
-    public InventoryObject playerInventory;               // The player's inventory
     public GameObject inventoryUI;                        // UI element for the inventory
 
     private Rigidbody rb;                                 // Reference to the character's Rigidbody component
@@ -144,11 +143,6 @@ public class MC_Controller : MonoBehaviour
         currentPickupObject = pickupObject;
     }
 
-    public void SetInventory(InventoryObject inventoryObject)
-    {
-        playerInventory = inventoryObject;
-    }
-
     public void Interact()
     {
         if (currentPickupObject != null)
@@ -156,11 +150,6 @@ public class MC_Controller : MonoBehaviour
             currentPickupObject.PickUp();                      // Pick up the current object
             currentPickupObject = null;
         }
-    }
-
-    public void AddItemToInventory(Item item, int amount)
-    {
-        playerInventory.AddItem(item, amount);                  // Add an item to the player's inventory
     }
 
     public void ClearCurrentPickupObject()

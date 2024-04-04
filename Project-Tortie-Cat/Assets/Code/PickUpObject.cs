@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
-    public InventoryObject inventoryObject;
 
     private MC_Controller mcController;
 
@@ -29,7 +28,6 @@ public class PickUpObject : MonoBehaviour
     {
         // Add the inventory object to the player's inventory
         MC_Controller playerController = FindObjectOfType<MC_Controller>();
-        playerController.SetInventory(inventoryObject);
 
         // Optionally, you can perform other actions when the object is picked up
         gameObject.SetActive(false);
