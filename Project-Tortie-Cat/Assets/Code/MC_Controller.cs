@@ -15,7 +15,7 @@ public class MC_Controller : MonoBehaviour
     private bool isGrounded;                               // Flag indicating if the character is grounded
     private bool isRunning;                                // Flag indicating if the character is running
     private bool isInventoryOpen;                          // Flag indicating if the inventory is open
-    private PickUpObject currentPickupObject;              // The current object the character can pick up
+    private ItemManagerment currentPickupObject;              // The current object the character can pick up
 
     private void Start()
     {
@@ -106,7 +106,7 @@ public class MC_Controller : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange))   // Cast a ray forward to detect objects within the interact range
         {
-            PickUpObject pickupObject = hit.collider.GetComponent<PickUpObject>();            // Check if the detected object can be picked up
+            ItemManagerment pickupObject = hit.collider.GetComponent<ItemManagerment>();        // Check if the detected object can be picked up
             if (pickupObject != null)
             {
                 pickupObject.PickUp();                              // Pick up the object
@@ -138,7 +138,7 @@ public class MC_Controller : MonoBehaviour
         Time.timeScale = 1f;                                 // Resume the game's time scale
     }
 
-    public void SetCurrentPickupObject(PickUpObject pickupObject)
+    public void SetCurrentPickupObject(ItemManagerment pickupObject)
     {
         currentPickupObject = pickupObject;
     }
