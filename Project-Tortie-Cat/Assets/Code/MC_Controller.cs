@@ -17,6 +17,8 @@ public class MC_Controller : MonoBehaviour
     private bool isInventoryOpen;                          // Flag indicating if the inventory is open
     private ItemManagerment currentPickupObject;              // The current object the character can pick up
 
+    public LayerMask interactableLayerMask;                // is layern which item is on
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -103,14 +105,19 @@ public class MC_Controller : MonoBehaviour
 
     private void TryPickup()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange))   // Cast a ray forward to detect objects within the interact range
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayerMask));   // Cast a ray forward to detect objects within the interact range
         {
-            ItemManagerment pickupObject = hit.collider.GetComponent<ItemManagerment>();        // Check if the detected object can be picked up
-            if (pickupObject != null)
+            if (Vector3.Distance(hit.point, transform.position) < interactRange)
             {
-                pickupObject.PickUp();                              // Pick up the object
-                animator.SetBool("isPicking", true);                 // Set the "isPicking" parameter in the animator
+                ItemManagerment pickupObject = hit.collider.GetComponent<ItemManagerment>();        // Check if the detected object can be picked up
+                if (pickupObject != null)
+                {
+                    pickupObject.PickUp();                              // Pick up the object
+                    animator.SetBool("isPicking", true);                 // Set the "isPicking" parameter in the animator
+                }
             }
         }
     }

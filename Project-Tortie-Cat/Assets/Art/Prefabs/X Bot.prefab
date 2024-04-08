@@ -2457,5 +2457,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   interactRange: 2
-  playerInventory: {fileID: 0}
   inventoryUI: {fileID: 0}
+  interactableLayerMask:
+    serializedVersion: 2
+    m_Bits: 512

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class ItemManagerment : MonoBehaviour
 {
     private MC_Controller mcController;
@@ -38,4 +39,18 @@ public class ItemManagerment : MonoBehaviour
         // Disable the object when it's picked up
         gameObject.SetActive(false);
     }
+
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        MeshFilter filter = GetComponent<MeshFilter>();
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
+        BoxCollider collider = GetComponent<BoxCollider>();
+
+        filter.mesh = item.mesh;
+        renderer.materials = item.materials.ToArray();
+        collider.size = item.mesh.bounds.size * 0.8f;
+    }
+#endif
+
 }
