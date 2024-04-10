@@ -28,16 +28,15 @@ public class ItemManagerment : MonoBehaviour
     public void PickUp()
     {
         // Get reference to the player's inventory
-        Inventory inventory = FindObjectOfType<Inventory>();
+        InventoryManager inventory = MC_Controller.Controller.GetComponent<InventoryManager>();
 
         if (inventory != null)
         {
             // Add the item to the player's inventory
-            inventory.AddItem(this.GetComponent<Item>());
-        }
-
-        // Disable the object when it's picked up
-        gameObject.SetActive(false);
+            inventory.AddItem(this.GetComponent<ItemManagerment>());
+            // Disable the objct when it's picked up
+            gameObject.SetActive(false);
+        }               
     }
 
 #if UNITY_EDITOR

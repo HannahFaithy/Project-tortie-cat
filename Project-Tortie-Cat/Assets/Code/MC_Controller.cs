@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class MC_Controller : MonoBehaviour
 {
     public float moveSpeed = 5f;                          // Movement speed of the character
@@ -19,7 +20,22 @@ public class MC_Controller : MonoBehaviour
 
     public LayerMask interactableLayerMask;                // is layern which item is on
 
-    private void Start()
+    public static MC_Controller Controller;
+
+
+    private void Awake()
+    {
+        if (Controller != null && Controller != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Controller = this;
+        }
+    }
+
+void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();

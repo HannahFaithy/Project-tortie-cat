@@ -295,6 +295,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &381157485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381157479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdeb9e56e0160b4fa57ef20bb3364f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 11400000, guid: 837df6e08818ed549ab7d7f97a644692, type: 2}
+  itemList: []
 --- !u!1001 &404723619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1297,12 +1311,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1999926354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bdeb9e56e0160b4fa57ef20bb3364f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cd960d1848eaa246b94cd9311f0e25b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 2782053823010051893, guid: dd15fc6ab69d8ce4e96312de89a06820, type: 3}
   slotsParent: {fileID: 869834998}
   numSlots: 20
-  Inventory: {fileID: 11400000, guid: 837df6e08818ed549ab7d7f97a644692, type: 2}
-  itemList:
-  - {fileID: 11400000, guid: cfdde9f97b69da04bab4ecf61d2890d8, type: 2}

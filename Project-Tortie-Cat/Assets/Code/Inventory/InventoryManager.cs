@@ -4,27 +4,49 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject slotPrefab; // prefab of the slot
-    public Transform slotsParent; // parent which slots added to
-    public int numSlots = 20; // number of slots
     public Inventory Inventory;
     public List<Item> itemList;
     // Start is called before the first frame update
     void Start()
     {
-        SpawnSlots();
-        for (int i = 0; i < itemList.Count; i++)
+        for (int i = 0; i < Inventory.items.Count; i++)
         {
-            itemList[i] = ScriptableObject.Instantiate(itemList[i]);
+            itemList.Add(ScriptableObject.Instantiate(Inventory.items[i]));
         }
+
+       Inventory = ScriptableObject.Instantiate(Inventory);
     }
 
-    // Update is called once per frame
-    void SpawnSlots()
+    public void AddItem(ItemManagerment M)
     {
-        for (int i = 0; i < numSlots; i++)
+        Item item = M.item;
+        /*if (item.IsStackable())
         {
-            GameObject slot = Instantiate(slotPrefab, slotsParent);
-        }
+            // Check if the item already exists in the inventory
+            Item existingItem = itemList.Find(i => i.name == item.name && i.quantity < i.maxStackSize);
+            if (existingItem != null)
+            {
+                // Add to existing stack
+                int remainingSpace = existingItem.maxStackSize - existingItem.quantity;
+                if (remainingSpace >= item.quantity)
+                {
+                    existingItem.quantity += item.quantity;
+                    return;
+                }
+                else
+                {
+                    existingItem.quantity = existingItem.maxStackSize;
+                    item.quantity -= remainingSpace;
+                }
+            }
+        }*/
+
+        // If not stackable or no existing stack found, add as a new item
+        itemList.Add(item);
+    }
+
+    public void RemoveItem(Item item)
+    {
+        itemList.Remove(item);
     }
 }
