@@ -1,42 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class OptionMenu : MonoBehaviour
 {
-    private bool isInMainMenu;
-
-    [SerializeField] private Button backButton;
+    private MenuManager menuManager;
 
     void Start()
     {
-        // Determine if options menu was accessed from main menu or pause menu
-        isInMainMenu = SceneManager.GetActiveScene().name == "MainMenu";
-
-        // Assign the appropriate onClick event for the Back button
-        if (isInMainMenu)
-        {
-            // If accessed from main menu, assign onClick event to return to main menu
-            backButton.onClick.AddListener(ReturnToMainMenu);
-        }
-        else
-        {
-            // If accessed from pause menu, assign onClick event to return to pause menu
-            backButton.onClick.AddListener(ReturnToPauseMenu);
-        }
+        // Access the MenuManager component from the parent GameObject
+        menuManager = transform.parent.GetComponent<MenuManager>();
     }
 
-    // Function to handle returning to the main menu
-    void ReturnToMainMenu()
+    public void OnBackButtonClicked()
     {
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    // Function to handle returning to the pause menu
-    void ReturnToPauseMenu()
-    {
-        SceneManager.LoadScene("PauseMenu");
+        menuManager.ShowPreviousMenu();
     }
 }

@@ -1,35 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    private bool isPaused = false;
+    public Button optionMenuButton;
+    public Button mainMenuButton;
 
-    private void Update()
+    private MenuManager menuManager;
+
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!isPaused)
-                PauseGame();
-            else
-                ResumeGame();
-        }
-    }
-        public void PauseGame()
-    {
-        isPaused = true;
-        Time.timeScale = 0.0f; //pause the game
+        // Find the MenuManager script in the scene
+        menuManager = FindObjectOfType<MenuManager>();
+
+        // Add onClick listeners to the buttons
+        optionMenuButton.onClick.AddListener(ShowOptionMenu);
+        mainMenuButton.onClick.AddListener(ShowMainMenu);
     }
 
-    public void ResumeGame()
+    public void ShowOptionMenu()
     {
-        isPaused = false;
-        Time.timeScale = 1.0f; //resume game
+        menuManager.ShowOptionMenu();
     }
 
-    public void QuitGame()
+    public void ShowMainMenu()
     {
+        menuManager.ShowMainMenu();
+    }
+    public void ShowPauseMenu()
+    {
+        menuManager.ShowPauseMenu();
+    }
+    public void OnQuitButtonClicked()
+    {
+        // Quit the game
         Debug.Log("Quit");
         Application.Quit();
     }
