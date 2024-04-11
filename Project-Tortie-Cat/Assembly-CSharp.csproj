@@ -55,8 +55,8 @@
   <ItemGroup>
     <Compile Include="Assets\Code\Menu things\PauseMenu.cs" />
     <Compile Include="Assets\Code\Menu things\MainMenu.cs" />
-    <Compile Include="Assets\Code\Menu things\OptionMenu.cs" />
     <Compile Include="Assets\Code\Menu things\MenuManager.cs" />
+    <Compile Include="Assets\Code\Menu things\OptionMenu.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
