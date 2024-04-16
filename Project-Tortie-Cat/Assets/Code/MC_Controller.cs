@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class MC_Controller : MonoBehaviour
 {
     public float moveSpeed = 5f;                          // Movement speed of the character
@@ -8,7 +9,6 @@ public class MC_Controller : MonoBehaviour
     public Transform groundCheck;                         // Transform used to check if the character is grounded
     public LayerMask groundLayer;                         // Layer mask for identifying ground
     public float interactRange = 2f;                      // Range for interacting with objects
-    public InventoryObject playerInventory;               // The player's inventory
     public GameObject inventoryUI;                        // UI element for the inventory
 
     private Rigidbody rb;                                 // Reference to the character's Rigidbody component
@@ -16,9 +16,26 @@ public class MC_Controller : MonoBehaviour
     private bool isGrounded;                               // Flag indicating if the character is grounded
     private bool isRunning;                                // Flag indicating if the character is running
     private bool isInventoryOpen;                          // Flag indicating if the inventory is open
-    private PickUpObject currentPickupObject;              // The current object the character can pick up
+    private ItemManagerment currentPickupObject;              // The current object the character can pick up
 
-    private void Start()
+    public LayerMask interactableLayerMask;                // is layern which item is on
+
+    public static MC_Controller Controller;
+
+
+    private void Awake()
+    {
+        if (Controller != null && Controller != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Controller = this;
+        }
+    }
+
+void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -104,14 +121,19 @@ public class MC_Controller : MonoBehaviour
 
     private void TryPickup()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, interactRange))   // Cast a ray forward to detect objects within the interact range
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, interactableLayerMask));   // Cast a ray forward to detect objects within the interact range
         {
-            PickUpObject pickupObject = hit.collider.GetComponent<PickUpObject>();            // Check if the detected object can be picked up
-            if (pickupObject != null)
+            if (Vector3.Distance(hit.point, transform.position) < interactRange)
             {
-                pickupObject.PickUp();                              // Pick up the object
-                animator.SetBool("isPicking", true);                 // Set the "isPicking" parameter in the animator
+                ItemManagerment pickupObject = hit.collider.GetComponent<ItemManagerment>();        // Check if the detected object can be picked up
+                if (pickupObject != null)
+                {
+                    pickupObject.PickUp();                              // Pick up the object
+                    animator.SetBool("isPicking", true);                 // Set the "isPicking" parameter in the animator
+                }
             }
         }
     }
@@ -139,14 +161,9 @@ public class MC_Controller : MonoBehaviour
         Time.timeScale = 1f;                                 // Resume the game's time scale
     }
 
-    public void SetCurrentPickupObject(PickUpObject pickupObject)
+    public void SetCurrentPickupObject(ItemManagerment pickupObject)
     {
         currentPickupObject = pickupObject;
-    }
-
-    public void SetInventory(InventoryObject inventoryObject)
-    {
-        playerInventory = inventoryObject;
     }
 
     public void Interact()
@@ -156,11 +173,6 @@ public class MC_Controller : MonoBehaviour
             currentPickupObject.PickUp();                      // Pick up the current object
             currentPickupObject = null;
         }
-    }
-
-    public void AddItemToInventory(Item item, int amount)
-    {
-        playerInventory.AddItem(item, amount);                  // Add an item to the player's inventory
     }
 
     public void ClearCurrentPickupObject()
