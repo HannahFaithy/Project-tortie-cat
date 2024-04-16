@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MC_Inventory
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 35953938293a4374db92be6b4a78d7df, type: 2}
-  - {fileID: 11400000, guid: 3d88c9f617e873a4382dbf13f667757a, type: 2}
-  - {fileID: 11400000, guid: 4d8e528a5644f444c952739212891782, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
