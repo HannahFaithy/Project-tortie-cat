@@ -21,9 +21,12 @@ MonoBehaviour:
   m_ShowMode: 4
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Title: Game
   m_RootView: {fileID: 2}
 =======
+=======
+>>>>>>> parent of 805188c (updating githuub files)
 =======
 >>>>>>> parent of 805188c (updating githuub files)
   m_Title: Inspector
@@ -808,10 +811,14 @@ MonoBehaviour:
       m_LastClickedID: 0
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_ExpandedIDs: 18fbffff
 =======
       m_ExpandedIDs: 7ef8ffff
 >>>>>>> inventory2
+=======
+      m_ExpandedIDs: 7ef8ffff
+>>>>>>> parent of 805188c (updating githuub files)
 =======
       m_ExpandedIDs: 7ef8ffff
 >>>>>>> parent of 805188c (updating githuub files)
@@ -941,12 +948,15 @@ MonoBehaviour:
     speed: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Value: {x: 0.011532363, y: -0.16365258, z: -0.0019131049, w: -0.9864517}
   m_Size:
     m_Target: 356.41348
     speed: 2
     m_Value: 356.41348
 =======
+=======
+>>>>>>> parent of 805188c (updating githuub files)
 =======
 >>>>>>> parent of 805188c (updating githuub files)
     m_Value: {x: 0.1497692, y: -0.530771, z: 0.095931284, w: 0.82864255}
