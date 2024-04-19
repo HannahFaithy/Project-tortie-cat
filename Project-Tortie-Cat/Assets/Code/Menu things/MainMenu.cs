@@ -8,8 +8,10 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        // Find the MenuManager component in the scene
-        menuManager = FindObjectOfType<MenuManager>();
+        // Access the MenuManager component from the parent GameObject
+        menuManager = transform.parent.GetComponent<MenuManager>();
+
+        menuManager.background.SetActive(true);
 
         // Check if MenuManager component is found
         if (menuManager == null)
@@ -26,15 +28,8 @@ public class MainMenu : MonoBehaviour
 
     public void OnOptionsButtonClicked()
     {
-        // Check if MenuManager reference is valid
-        if (menuManager != null)
-        {
-            menuManager.ShowOptionMenu();
-        }
-        else
-        {
-            Debug.LogWarning("MenuManager reference is null!");
-        }
+        menuManager.ShowOptionMenu();
+        menuManager.HideMainMenu();
     }
 
     public void OnQuitButtonClicked()

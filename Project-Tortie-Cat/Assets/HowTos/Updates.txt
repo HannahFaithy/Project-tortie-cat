@@ -1,0 +1,9 @@
+- done 
+	- made how tos for building the scene with prefabs and scrits
+	- fixed up the scenes
+
+- to do
+	- make items stack
+	- make it show that the items are stacking in the ui
+	- make the pause menu return ot main menu button work with the main menu being in a different scene.
+	- find out why the pause menu script has option and main menu button when other menu scripts dont.

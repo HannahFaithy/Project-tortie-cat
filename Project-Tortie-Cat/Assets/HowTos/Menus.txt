@@ -1,0 +1,29 @@
+- put the Menus Game Object in the scene (both main menu scene and main scene)
+	- make sure it has the canvas, canvas scaler, graphic raycaster attached
+	- make sue it has the Menu Manager (Script)
+		- Main Menu is the main menu from the main menu scene
+		- Option Menu is the option menu gameobject in the hierachy
+		- Pause Menu is the pause menu gameobject in the hierachy
+		- Background is the background for the menus
+
+- make sure that the option menu gaemobejct has the option menu (script)
+	- make sure that the back button On Click() is the option menu game obejct with the selected OptionMenu.OnBackButtonClicked
+
+- make sure that the Pause menu gameobject has the Pause menu (script)
+	- option menu button is the option menu button in the child
+	- main menu button is the main menu button in the child
+	- make sure that the resume button On Click() is the pause menu gameobejct wth the Pausemenu.ShowPauseMenu
+	- The save button is empty for now
+	- make sure that the Options button On Click() is the pause menu gameobject with the PauseMenu.ShowOptionMenu
+	- make sure that the Main Menu button On Click() is the pause menu gameobject with the PauseMenu.ShowMainMenu
+	- make sur that the Quit button On Click() is the pause menu gameobject with the PauseMenu.OnQuitButtonClicked
+- make sure that theres a EventSystem in the hierachy.
+
+Main menu is in the menu game object and should be null when in the game scene
+- make sure that the main menu has the main Menu (script)
+	- make sure that the Play button has the On Click() has the Main Menu game object in ut and is selected as MainMenu.OnPlayButtonClicked
+	- make sure that the Options Button has the On Click() as the Main Menu gameobject in it and is selected MainMenu.OnOptionsButtonClicked
+	- make sure that the Quit Button has the On Click() as the MainMenu gameobject, with the selected as MainMenu.OnQuitButtonClicked
+
+- make sure that the Option Menu has the Option Menu (script)
+	- make sure that back button has the On Click() as Option menu gameobject witht the selected as OptionMenu.OnBackButtonClicked

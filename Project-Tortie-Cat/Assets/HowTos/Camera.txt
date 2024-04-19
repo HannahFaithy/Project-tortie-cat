@@ -1,0 +1,6 @@
+- Put the main camera prefab into the scene and delete the ine thats in it already
+- make sure it has the Camera Follow (script) attached
+	- target should be CameraTarget (Transform)
+		- this is in the X Bot prefab and is a child gameobejct to it.
+- Offset should be X = 0, y = 5 and Z = 0 (adjust to whats best)
+- smooth Speed should be 0.125 (adjust to whats best)

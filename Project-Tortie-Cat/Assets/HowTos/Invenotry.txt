@@ -1,0 +1,21 @@
+- put the Invenotry prefab onto a gameobject called Canvas. (this is a different one then the menus)
+ - make sure that the Layer is changed to UI under the name
+- make sure that the scale is X = 1, Y = 1 and Z = 1
+- make sure that theres a Canvas, Canvas Scaler, and Graphic Raycaster and the layer is UI on the Canvas Gameobject that Invenotry is attached to.
+- make sure theres an Image attached to the inspector of Invenotry
+	- fill it in as needed
+- make sure theres a Gride Layout Group attached
+	- padding is left = 40, right = 40, top = 40 and bottom = 40
+	- cell size is X = 10, Y = 10
+	- Spacing is X = 50, Y = 50
+	- start corner is upper left
+	- start axis is horizontal
+	- child alignment is upper left
+	- constraint is flexible
+	- remember these can all be changed to what is best
+- make sure there is an Invenotry Viewer (script)
+	- Slot prefab is InvenotrySlot
+		- this is a prefab that gets created on play so don't add inot the hierarchy
+	- slots parent is Invenotry (react transform)
+		- this is the ivenotry game object attached to the canvas
+	- num SLots is 20 (can be changed for more or less depending on invenotry size.)

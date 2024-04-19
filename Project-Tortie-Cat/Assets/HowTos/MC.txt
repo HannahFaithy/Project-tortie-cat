@@ -1,0 +1,23 @@
+- put the MC prefab in the scene
+- make sure that the animator is attached
+	- animator should have the controller be MC
+	- the avator on it shuld be X BotAvatar
+	- everyhitng else is the same
+- make sure that MC_Controller (script) is attached
+	- move speed should be 5 (adjust for whats best)
+	- jump force should be 5 (adjust for whats best)
+	- run speed multipler should be 2 (adjust for whats best)
+	- ground check should be GroundCheck (transform)
+		- GroundCheck should be a gameobject attached to the X Bot gameobject in the hierachy
+	- ground layer should be Ground
+		- if no layer is there, make a new layer on 8 and call it Ground
+	- interact range should be 2 (adjust for whats best)
+	- Invenotry UI should be Canvas
+		- Canvas is a game object which is a prefab and is what the Inventory prefab should be attached to
+	Interactable Layer Mask should be Clickable
+		- if no Clickable layer then make a new layer on 9 and call it Clickable
+- make sure Inventory Manager (script) is attached
+	- Invenotry should be the MC_invenotry (inventory) scriptable object
+		- if no scriptable object then create one.
+	- item list should be size 0
+- invenotry Viewer should be Invenotry (Invenotry Viewer)

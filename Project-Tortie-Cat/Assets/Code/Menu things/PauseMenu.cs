@@ -4,34 +4,38 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public Button optionMenuButton;
-    public Button mainMenuButton;
-
     private MenuManager menuManager;
 
     void Start()
     {
-        // Find the MenuManager script in the scene
-        menuManager = FindObjectOfType<MenuManager>();
+        // Access the MenuManager component from the parent GameObject
+        menuManager = transform.parent.GetComponent<MenuManager>();
 
-        // Add onClick listeners to the buttons
-        optionMenuButton.onClick.AddListener(ShowOptionMenu);
-        mainMenuButton.onClick.AddListener(ShowMainMenu);
+        menuManager.background.SetActive(true);
+
+        // check if MenuManager component is found
+        if (menuManager == null)
+        {
+            Debug.Log("MenuManager not found in the scene");
+        }
     }
 
     public void ShowOptionMenu()
     {
         menuManager.ShowOptionMenu();
+        menuManager.HidePauseMenu();
     }
 
     public void ShowMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
     }
-    public void ShowPauseMenu()
+
+    public void Resume()
     {
-        menuManager.ShowPauseMenu();
+        menuManager.HidePauseMenu();
     }
+
     public void OnQuitButtonClicked()
     {
         // Quit the game
