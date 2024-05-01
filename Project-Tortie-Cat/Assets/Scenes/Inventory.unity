@@ -315,8 +315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inventory: {fileID: 11400000, guid: 837df6e08818ed549ab7d7f97a644692, type: 2}
+  Canvas: {fileID: 1781397612}
   itemList: []
-  inventoryViewer: {fileID: 1185288847}
 --- !u!4 &304841571 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8545545994157638764, guid: 6b420a6b41248924ab23a83b7885015a, type: 3}
@@ -685,17 +685,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7632974063970358239, guid: b0cb8402dc52c3843b88bd27fe606620, type: 3}
   m_PrefabInstance: {fileID: 27470926}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1185288847 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6957828502990534865, guid: b0cb8402dc52c3843b88bd27fe606620, type: 3}
-  m_PrefabInstance: {fileID: 27470926}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd960d1848eaa246b94cd9311f0e25b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1678811548
 PrefabInstance:
   m_ObjectHideFlags: 0

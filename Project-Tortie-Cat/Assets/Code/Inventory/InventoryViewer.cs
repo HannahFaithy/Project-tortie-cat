@@ -30,6 +30,9 @@ public class InventoryViewer : MonoBehaviour
             Image sprite = child.GetComponentInChildren<Image>();
             if (i < inv.itemList.Count)
                 sprite.sprite = inv.itemList[i].icon;
+
+            //do the coed for updating invenotry UI
+            //inv.UpdateInventoryUI();
         }
     }
 }

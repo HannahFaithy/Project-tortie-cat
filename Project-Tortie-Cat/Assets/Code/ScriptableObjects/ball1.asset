@@ -16,7 +16,8 @@ MonoBehaviour:
   description: 
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   maxStackSize: 2
-  quantity: 0
+  isStackable: 0
+  amount: 1
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}

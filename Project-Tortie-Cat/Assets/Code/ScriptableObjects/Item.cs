@@ -9,12 +9,8 @@ public class Item : ScriptableObject
     public string description;
     public Sprite icon;
     public int maxStackSize; // max stack size
-    public int quantity; // current stack size
+    public bool isStackable; //bool for if stackable
+    public int amount; // current item aount that is to be picked up which is on the groun
     public Mesh mesh;
     public List<Material> materials;
-
-    public bool IsStackable()
-    {
-        return maxStackSize > 1;
-    }
 }

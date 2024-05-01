@@ -34,7 +34,7 @@ public class ItemManagerment : MonoBehaviour
         {
             // Add the item to the player's inventory
             inventory.AddItem(this.GetComponent<ItemManagerment>());
-            // Disable the objct when it's picked up
+            // Disable the objct when it's picked up will change to destroy
             gameObject.SetActive(false);
         }               
     }
