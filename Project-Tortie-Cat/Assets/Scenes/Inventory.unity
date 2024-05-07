@@ -315,7 +315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inventory: {fileID: 11400000, guid: 837df6e08818ed549ab7d7f97a644692, type: 2}
-  Canvas: {fileID: 1781397612}
   itemList: []
 --- !u!4 &304841571 stripped
 Transform:

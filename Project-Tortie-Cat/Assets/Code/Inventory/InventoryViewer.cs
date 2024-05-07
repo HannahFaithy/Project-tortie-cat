@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryViewer : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class InventoryViewer : MonoBehaviour
                 sprite.sprite = inv.itemList[i].icon;
 
             //do the coed for updating invenotry UI
-            //inv.UpdateInventoryUI();
+            inv.UpdateInventoryUI();
         }
     }
 }

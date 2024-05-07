@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class InventoryManager : MonoBehaviour
 {
     public Inventory Inventory;
     public List<Item> itemList;
+    public List<int> itemAmounts;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,10 +60,37 @@ public class InventoryManager : MonoBehaviour
         itemList.Remove(item);
     }
 
-    /*
     public void UpdateInventoryUI()
     {
+        // Update UI for each slot
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform slot = transform.GetChild(i);
 
+            // Find the TextMeshProUGUI component within the second child of the slot
+            TextMeshProUGUI textMeshPro = slot.GetChild(1).GetComponent<TextMeshProUGUI>();
+
+            // Check if the index is within the range of items
+            if (i < itemList.Count)
+            {
+                // Get the item and its corresponding amount
+                Item item = itemList[i];
+                int amount = (i < itemAmounts.Count) ? itemAmounts[i] : 0;
+
+                // Update the UI text with the item amount
+                if (textMeshPro != null)
+                {
+                    textMeshPro.text = amount.ToString();
+                }
+            }
+            else
+            {
+                // Clear the UI text if no item exists in this slot
+                if (textMeshPro != null)
+                {
+                    textMeshPro.text = "";
+                }
+            }
+        }
     }
-    */
 }
